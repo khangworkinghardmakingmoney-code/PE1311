@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+._*
+
+# Node / Next.js (nếu sau này cài dependencies)
+node_modules/
+.next/
+out/
+
+# Editor
+.vscode/
+.idea/
