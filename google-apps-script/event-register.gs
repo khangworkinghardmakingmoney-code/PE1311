@@ -18,6 +18,12 @@ const HEADERS = [
   'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu', 'Biết đến qua',
 ];
 
+const FREE_EMAIL_DOMAINS = [
+  'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.com.vn', 'ymail.com', 'rocketmail.com',
+  'outlook.com', 'outlook.com.vn', 'hotmail.com', 'live.com', 'msn.com', 'icloud.com', 'me.com', 'mac.com',
+  'aol.com', 'proton.me', 'protonmail.com', 'zoho.com', 'mail.com', 'gmx.com', 'yandex.com', 'qq.com',
+];
+
 function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -31,6 +37,12 @@ function doPost(e) {
     const missing = required.filter(function (k) { return !String(p[k] || '').trim(); });
     if (missing.length) {
       return json_({ ok: false, error: 'missing_fields', fields: missing });
+    }
+
+    // Chỉ nhận email doanh nghiệp (giữ giống danh sách FREE_EMAIL_DOMAINS trong index.html)
+    const domain = String(p.email).trim().toLowerCase().split('@')[1] || '';
+    if (FREE_EMAIL_DOMAINS.indexOf(domain) !== -1) {
+      return json_({ ok: false, error: 'free_email' });
     }
 
     const sheet = getSheet_();

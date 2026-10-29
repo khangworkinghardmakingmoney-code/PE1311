@@ -317,7 +317,6 @@
               <p>Trải nghiệm cách chuyên gia đầu tư tài chính nhìn danh mục: rủi ro, đa dạng hóa, độ phù hợp về chiến
                 lược</p>
             </div>
-            <span class="ev-agenda-time">[Giờ]</span>
           </li>
           <li class="ev-glass ev-agenda-item">
             <span class="ev-agenda-num">02</span>
@@ -326,7 +325,6 @@
               <h3>Nhìn đội ngũ lãnh đạo như một danh mục đầu tư</h3>
               <p>Khi một điểm mạnh lặp lại quá nhiều trở thành những rủi ro khó lường</p>
             </div>
-            <span class="ev-agenda-time">[Giờ]</span>
           </li>
           <li class="ev-glass ev-agenda-item">
             <span class="ev-agenda-num">03</span>
@@ -335,7 +333,6 @@
               <h3>Đầu tư vào lãnh đạo trong thực tế</h3>
               <p>4 diễn giả cùng giải bài toán: phát triển, điều chuyển, đa dạng hóa, kế thừa hay tuyển mới.</p>
             </div>
-            <span class="ev-agenda-time">[Giờ]</span>
           </li>
           <li class="ev-orange-card ev-agenda-item">
             <span class="ev-agenda-num">04</span>
@@ -345,7 +342,6 @@
               <p>Từ đánh giá từng cá nhân sang bức tranh năng lực cả đội ngũ, minh họa qua SELI<sup class="ev-tm">™</sup>
                 – công cụ đánh giá năng lực lãnh đạo được phát triển bởi The New Leaders.</p>
             </div>
-            <span class="ev-agenda-time">[Giờ]</span>
           </li>
           <li class="ev-glass ev-agenda-item">
             <span class="ev-agenda-num">05</span>
@@ -354,7 +350,6 @@
               <h3>Tái cơ cấu cho tương lai</h3>
               <p>Áp dụng Leadership Portfolio Framework vào chính tổ chức của anh/chị</p>
             </div>
-            <span class="ev-agenda-time">[Giờ]</span>
           </li>
         </ol>
       </div>
@@ -645,7 +640,7 @@
           <div class="ev-form-grid">
             <label class="ev-field"><span>Họ và tên <span class="ev-required" aria-hidden="true">*</span></span><input type="text" name="name" class="ev-input" required></label>
             <label class="ev-field"><span>Email doanh nghiệp <span class="ev-required" aria-hidden="true">*</span></span><input type="email" name="email" class="ev-input"
-                required></label>
+                placeholder="ten@congty.com" required></label>
             <label class="ev-field"><span>Số điện thoại <span class="ev-required" aria-hidden="true">*</span></span><input type="tel" name="phone" class="ev-input" required
                 pattern="[0-9+\(\)\s.\-]{8,20}" title="Số điện thoại gồm 8–20 chữ số"></label>
             <label class="ev-field"><span>Công ty / Tổ chức <span class="ev-required" aria-hidden="true">*</span></span><input type="text" name="company" class="ev-input"
@@ -736,6 +731,25 @@
     // Form đăng ký → Google Sheet qua Apps Script (xem google-apps-script/event-register.gs)
     const REGISTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyOgUksKSBjEHpctzmMEm1OFdvaZpshl-lq-Uxd08IHP7GFJHSvfiPakK2MtzOd9l_t/exec';
 
+    // Chỉ nhận email doanh nghiệp: chặn các dịch vụ email miễn phí (giữ giống danh sách trong Apps Script)
+    const FREE_EMAIL_DOMAINS = [
+      'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.com.vn', 'ymail.com', 'rocketmail.com',
+      'outlook.com', 'outlook.com.vn', 'hotmail.com', 'live.com', 'msn.com', 'icloud.com', 'me.com', 'mac.com',
+      'aol.com', 'proton.me', 'protonmail.com', 'zoho.com', 'mail.com', 'gmx.com', 'yandex.com', 'qq.com'
+    ];
+    const emailInput = document.querySelector('#formEventRegister input[name="email"]');
+    function checkBusinessEmail() {
+      const domain = emailInput.value.trim().toLowerCase().split('@')[1] || '';
+      emailInput.setCustomValidity(FREE_EMAIL_DOMAINS.includes(domain)
+        ? 'Vui lòng dùng email doanh nghiệp (không dùng Gmail, Yahoo, Outlook, iCloud…).'
+        : '');
+    }
+    emailInput.addEventListener('input', checkBusinessEmail);
+    emailInput.addEventListener('blur', function () {
+      checkBusinessEmail();
+      if (!emailInput.checkValidity()) emailInput.reportValidity();
+    });
+
     document.getElementById('formEventRegister').addEventListener('submit', async function (e) {
       e.preventDefault();
       const form = this;
@@ -746,6 +760,7 @@
       form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(function (input) {
         input.value = input.value.trim();
       });
+      checkBusinessEmail();
       if (!form.checkValidity()) {
         form.reportValidity();
         return;

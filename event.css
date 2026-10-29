@@ -908,13 +908,6 @@ button {
   color: var(--ev-text-soft);
 }
 
-.ev-agenda-time {
-  flex: 0 0 auto;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ev-cyan);
-}
-
 .ev-agenda-item.ev-orange-card .ev-agenda-num {
   border: 0;
   background: var(--ev-white);
@@ -923,11 +916,6 @@ button {
 
 .ev-agenda-item.ev-orange-card .ev-agenda-body p {
   font-weight: 600;
-  color: var(--ev-white);
-}
-
-.ev-agenda-item.ev-orange-card .ev-agenda-time {
-  font-weight: 800;
   color: var(--ev-white);
 }
 
