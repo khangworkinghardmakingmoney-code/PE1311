@@ -15,7 +15,7 @@ const SHEET_NAME = 'Đăng ký';
 
 const HEADERS = [
   'Thời gian', 'Họ và tên', 'Email', 'Số điện thoại',
-  'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu',
+  'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu', 'Biết đến qua',
 ];
 
 function doPost(e) {
@@ -41,6 +41,7 @@ function doPost(e) {
       p.position || '',
       p.mode === 'online' ? 'Tham gia Online' : 'Tham gia Trực tiếp',
       p.consent ? 'Có' : 'Không',
+      p.source || '',
     ]);
     return json_({ ok: true });
   } catch (err) {
@@ -57,8 +58,11 @@ function getSheet_() {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+  } else {
+    // Sheet tạo trước khi thêm cột mới: ghi lại hàng tiêu đề cho đủ cột
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
   }
+  sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
   return sheet;
 }
 
