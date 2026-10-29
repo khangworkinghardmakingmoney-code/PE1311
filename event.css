@@ -1279,6 +1279,11 @@ button {
   gap: 16px;
 }
 
+.ev-required {
+  color: var(--ev-orange-light);
+  font-weight: 800;
+}
+
 .ev-field {
   display: flex;
   flex-direction: column;

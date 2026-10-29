@@ -635,15 +635,17 @@
 
         <form class="ev-form" id="formEventRegister">
           <div class="ev-form-grid">
-            <label class="ev-field">Họ và tên<input type="text" name="name" class="ev-input" required></label>
-            <label class="ev-field">Email doanh nghiệp<input type="email" name="email" class="ev-input"
+            <label class="ev-field"><span>Họ và tên <span class="ev-required" aria-hidden="true">*</span></span><input type="text" name="name" class="ev-input" required></label>
+            <label class="ev-field"><span>Email doanh nghiệp <span class="ev-required" aria-hidden="true">*</span></span><input type="email" name="email" class="ev-input"
                 required></label>
-            <label class="ev-field">Số điện thoại<input type="tel" name="phone" class="ev-input" required></label>
-            <label class="ev-field">Công ty / Tổ chức<input type="text" name="company" class="ev-input"
+            <label class="ev-field"><span>Số điện thoại <span class="ev-required" aria-hidden="true">*</span></span><input type="tel" name="phone" class="ev-input" required
+                pattern="[0-9+\(\)\s.\-]{8,20}" title="Số điện thoại gồm 8–20 chữ số"></label>
+            <label class="ev-field"><span>Công ty / Tổ chức <span class="ev-required" aria-hidden="true">*</span></span><input type="text" name="company" class="ev-input"
                 required></label>
           </div>
-          <label class="ev-field">Vị trí
-            <select name="position" class="ev-input">
+          <label class="ev-field"><span>Vị trí <span class="ev-required" aria-hidden="true">*</span></span>
+            <select name="position" class="ev-input" required>
+              <option value="" disabled selected>Chọn vị trí</option>
               <option>C-level</option>
               <option>HR Director</option>
               <option>L&amp;D / Talent Leader</option>
@@ -651,7 +653,7 @@
               <option>Khác</option>
             </select>
           </label>
-          <label class="ev-field">Bạn biết đến chương trình qua đâu?
+          <label class="ev-field"><span>Bạn biết đến chương trình qua đâu? <span class="ev-required" aria-hidden="true">*</span></span>
             <select name="source" class="ev-input" required>
               <option value="" disabled selected>Chọn một lựa chọn</option>
               <option>Facebook/LinkedIn</option>
@@ -662,15 +664,15 @@
             </select>
           </label>
           <fieldset class="ev-fieldset">
-            <legend>Hình thức tham dự</legend>
+            <legend>Hình thức tham dự <span class="ev-required" aria-hidden="true">*</span></legend>
             <div class="ev-mode-grid">
-              <label class="ev-mode-option"><input type="radio" name="mode" value="offline" checked>Tham gia Trực
+              <label class="ev-mode-option"><input type="radio" name="mode" value="offline" checked required>Tham gia Trực
                 tiếp</label>
-              <label class="ev-mode-option"><input type="radio" name="mode" value="online">Tham gia Online</label>
+              <label class="ev-mode-option"><input type="radio" name="mode" value="online" required>Tham gia Online</label>
             </div>
           </fieldset>
-          <label class="ev-consent"><input type="checkbox" name="consent" required>Tôi đồng ý để The New Leaders xử lý
-            dữ liệu cá nhân theo Chính sách bảo mật.</label>
+          <label class="ev-consent"><input type="checkbox" name="consent" required><span>Tôi đồng ý để The New Leaders xử lý
+            dữ liệu cá nhân theo Chính sách bảo mật. <span class="ev-required" aria-hidden="true">*</span></span></label>
           <!-- Ô bẫy chống bot: ẩn với người dùng -->
           <input type="text" name="website" class="ev-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="ev-btn ev-btn-white ev-form-submit">Đăng ký miễn phí</button>
@@ -723,6 +725,15 @@
       const form = this;
       const button = form.querySelector('.ev-form-submit');
       const status = document.getElementById('eventRegisterSuccess');
+
+      // Mọi trường đều bắt buộc: bỏ khoảng trắng thừa để ô chỉ gõ dấu cách không lọt qua
+      form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(function (input) {
+        input.value = input.value.trim();
+      });
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
       button.disabled = true;
       button.textContent = 'Đang gửi...';

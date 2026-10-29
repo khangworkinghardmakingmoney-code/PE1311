@@ -26,8 +26,11 @@ function doPost(e) {
     // Ô bẫy: người thật không thấy nên để trống, bot thì hay điền vào
     if (p.website) return json_({ ok: true });
 
-    if (!p.name || !p.email || !p.phone || !p.company) {
-      return json_({ ok: false, error: 'missing_fields' });
+    // Mọi trường trên form đều bắt buộc
+    const required = ['name', 'email', 'phone', 'company', 'position', 'source', 'mode', 'consent'];
+    const missing = required.filter(function (k) { return !String(p[k] || '').trim(); });
+    if (missing.length) {
+      return json_({ ok: false, error: 'missing_fields', fields: missing });
     }
 
     const sheet = getSheet_();
