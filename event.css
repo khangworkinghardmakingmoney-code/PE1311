@@ -986,9 +986,34 @@ button {
   box-shadow: var(--ev-glass-inset);
 }
 
-.ev-partners img {
-  height: 48px;
-  width: auto;
+/* Co-organiser logos: one white tile each so dark/colour logos stay legible on glass */
+.ev-partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.ev-partner-logo {
+  width: 220px;
+  height: 88px;
+  padding: 14px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 26px rgba(10, 16, 41, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ev-partner-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(10, 16, 41, 0.35), 0 0 0 2px rgba(159, 242, 255, 0.6);
+}
+
+.ev-partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
