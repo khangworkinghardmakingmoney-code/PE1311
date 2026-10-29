@@ -1,5 +1,5 @@
 /**
- * Nhận dữ liệu form đăng ký từ event.html và ghi vào Google Sheet.
+ * Nhận dữ liệu form đăng ký từ index.html và ghi vào Google Sheet.
  *
  * Cách cài (một lần):
  *  1. Mở Google Sheet sẽ chứa dữ liệu → Extensions (Tiện ích) → Apps Script.
@@ -7,7 +7,7 @@
  *  3. Deploy → New deployment → loại "Web app":
  *       Execute as: Me   ·   Who has access: Anyone
  *  4. Cấp quyền khi được hỏi, rồi copy "Web app URL" (dạng https://script.google.com/macros/s/.../exec)
- *     dán vào biến REGISTER_ENDPOINT trong event.html.
+ *     dán vào biến REGISTER_ENDPOINT trong index.html.
  *  Sửa code sau này: Deploy → Manage deployments → Edit → Version: New version (giữ nguyên URL).
  */
 
