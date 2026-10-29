@@ -45,22 +45,29 @@ function doPost(e) {
       return json_({ ok: false, error: 'free_email' });
     }
 
+    // Email phải đúng dạng ten@tenmien.xx
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(p.email).trim())) {
+      return json_({ ok: false, error: 'invalid_email' });
+    }
+
     const sheet = getSheet_();
     sheet.appendRow([
       new Date(),
-      p.name,
-      p.email,
-      // Thêm ' để Sheets không cắt số 0 đầu của số điện thoại
-      "'" + p.phone,
-      p.company,
-      p.position || '',
+      cell_(p.name, 100),
+      cell_(p.email, 150),
+      // Luôn thêm ' để Sheets không cắt số 0 đầu của số điện thoại (và không coi là công thức)
+      "'" + clean_(p.phone, 20),
+      cell_(p.company, 150),
+      cell_(p.position, 100),
       p.mode === 'online' ? 'Tham gia Online' : 'Tham gia Trực tiếp',
       p.consent ? 'Có' : 'Không',
-      p.source || '',
+      cell_(p.source, 100),
     ]);
     return json_({ ok: true });
   } catch (err) {
-    return json_({ ok: false, error: String(err) });
+    // Ghi lỗi vào mục Executions, không trả chi tiết lỗi ra ngoài
+    console.error(err);
+    return json_({ ok: false, error: 'server_error' });
   } finally {
     lock.releaseLock();
   }
@@ -79,6 +86,21 @@ function getSheet_() {
   }
   sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
   return sheet;
+}
+
+// Bỏ khoảng trắng thừa, ký tự điều khiển và cắt theo độ dài tối đa
+function clean_(value, maxLength) {
+  return String(value || '')
+    .replace(/[\u0000-\u001F\u007F]/g, ' ')
+    .trim()
+    .slice(0, maxLength);
+}
+
+// Chống chèn công thức: Sheets coi ô bắt đầu bằng = + - @ là công thức (vd =IMPORTXML(...)
+// có thể gửi dữ liệu các dòng khác ra ngoài khi mở Sheet). Thêm ' để ô luôn là chữ thường.
+function cell_(value, maxLength) {
+  const text = clean_(value, maxLength);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 
 function json_(obj) {
