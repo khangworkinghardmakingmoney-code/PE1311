@@ -769,7 +769,13 @@ button {
 }
 
 .ev-speaker-lens {
+  /* Reserve 3 lines and sit the text on the name, so names line up across cards
+     even when one lens label wraps */
+  min-height: calc(1.5em * 3);
+  display: flex;
+  align-items: flex-end;
   font-size: 12px;
+  line-height: 1.5;
   font-weight: 800;
   letter-spacing: 1.6px;
   color: var(--ev-cyan);
@@ -1544,6 +1550,11 @@ select.ev-input {
 
   .ev-stats {
     grid-template-columns: 1fr;
+  }
+
+  /* Speaker cards stack in one column here, no need to line names up */
+  .ev-speaker-lens {
+    min-height: 0;
   }
 
   .ev-compare-row {
