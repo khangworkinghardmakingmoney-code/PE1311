@@ -347,6 +347,40 @@ button {
   gap: 18px;
 }
 
+/* Social icon buttons (header + footer) */
+.ev-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ev-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--ev-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ev-social-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--ev-cyan);
+  background: rgba(159, 242, 255, 0.16);
+  color: var(--ev-cyan);
+}
+
+.ev-social-btn:focus-visible {
+  outline: 2px solid var(--ev-cyan);
+  outline-offset: 3px;
+}
+
 .ev-nav-cta {
   min-height: 46px;
   padding: 0 24px;
@@ -1446,6 +1480,7 @@ select.ev-input {
 .ev-footer-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 24px;
   font-weight: 600;
 }
