@@ -659,10 +659,12 @@
           <label class="ev-field"><span>Bạn biết đến chương trình qua đâu? <span class="ev-required" aria-hidden="true">*</span></span>
             <select name="source" class="ev-input" required>
               <option value="" disabled selected>Chọn một lựa chọn</option>
-              <option>Facebook/LinkedIn</option>
+              <option>Facebook</option>
+              <option>LinkedIn</option>
               <option>Email Newsletter</option>
               <option>Lời mời từ đội ngũ The New Leaders</option>
-              <option>Thông qua các đối tác đồng tổ chức (Adecco, VinaCapital)</option>
+              <option>Thông qua đối tác Adecco</option>
+              <option>Thông qua đối tác VinaCapital</option>
               <option>Khác</option>
             </select>
           </label>
@@ -674,6 +676,9 @@
               <label class="ev-mode-option"><input type="radio" name="mode" value="online" required>Tham gia Online</label>
             </div>
           </fieldset>
+          <label class="ev-field"><span>Anh/Chị có câu hỏi hoặc khó khăn gì cần được giải đáp khi tham gia chương trình? <span class="ev-optional">(không bắt buộc)</span></span>
+            <textarea name="question" class="ev-input ev-textarea" rows="3" maxlength="1000"></textarea>
+          </label>
           <label class="ev-consent"><input type="checkbox" name="consent" required><span>Tôi đồng ý để The New Leaders xử lý
             dữ liệu cá nhân theo Chính sách bảo mật. <span class="ev-required" aria-hidden="true">*</span></span></label>
           <!-- Ô bẫy chống bot: ẩn với người dùng -->
@@ -757,7 +762,7 @@
       const status = document.getElementById('eventRegisterSuccess');
 
       // Mọi trường đều bắt buộc: bỏ khoảng trắng thừa để ô chỉ gõ dấu cách không lọt qua
-      form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(function (input) {
+      form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(function (input) {
         input.value = input.value.trim();
       });
       checkBusinessEmail();

@@ -1332,6 +1332,19 @@ select.ev-input {
   padding: 0 14px;
 }
 
+.ev-textarea {
+  min-height: 96px;
+  padding: 14px 16px;
+  font-family: inherit;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.ev-optional {
+  font-weight: 500;
+  opacity: 0.7;
+}
+
 .ev-input:focus {
   outline: 2px solid var(--ev-cyan);
   outline-offset: 1px;

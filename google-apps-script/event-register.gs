@@ -15,7 +15,7 @@ const SHEET_NAME = 'Đăng ký';
 
 const HEADERS = [
   'Thời gian', 'Họ và tên', 'Email', 'Số điện thoại',
-  'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu', 'Biết đến qua',
+  'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu', 'Biết đến qua', 'Câu hỏi / Khó khăn',
 ];
 
 const FREE_EMAIL_DOMAINS = [
@@ -32,7 +32,7 @@ function doPost(e) {
     // Ô bẫy: người thật không thấy nên để trống, bot thì hay điền vào
     if (p.website) return json_({ ok: true });
 
-    // Mọi trường trên form đều bắt buộc
+    // Mọi trường trên form đều bắt buộc, trừ câu hỏi (question)
     const required = ['name', 'email', 'phone', 'company', 'position', 'source', 'mode', 'consent'];
     const missing = required.filter(function (k) { return !String(p[k] || '').trim(); });
     if (missing.length) {
@@ -62,6 +62,7 @@ function doPost(e) {
       p.mode === 'online' ? 'Tham gia Online' : 'Tham gia Trực tiếp',
       p.consent ? 'Có' : 'Không',
       cell_(p.source, 100),
+      cell_(p.question, 1000),
     ]);
     return json_({ ok: true });
   } catch (err) {
