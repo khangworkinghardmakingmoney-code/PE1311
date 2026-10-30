@@ -10,3 +10,6 @@ out/
 # Editor
 .vscode/
 .idea/
+
+# Claude Code (cấu hình preview cục bộ)
+.claude/

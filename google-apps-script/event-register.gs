@@ -16,6 +16,7 @@ const SHEET_NAME = 'Đăng ký';
 const HEADERS = [
   'Thời gian', 'Họ và tên', 'Email', 'Số điện thoại',
   'Công ty / Tổ chức', 'Vị trí', 'Hình thức', 'Đồng ý dữ liệu', 'Biết đến qua', 'Câu hỏi / Khó khăn',
+  'Đồng ý chia sẻ cho Adecco & VinaCapital', 'Đồng ý dùng hình ảnh',
 ];
 
 const FREE_EMAIL_DOMAINS = [
@@ -63,6 +64,9 @@ function doPost(e) {
       p.consent ? 'Có' : 'Không',
       cell_(p.source, 100),
       cell_(p.question, 1000),
+      // 2 ô tuỳ chọn: không tick thì trình duyệt không gửi lên
+      p.share_partners ? 'Có' : 'Không',
+      p.photo_consent ? 'Có' : 'Không',
     ]);
     return json_({ ok: true });
   } catch (err) {
