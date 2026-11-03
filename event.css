@@ -1387,26 +1387,10 @@ select.ev-input {
   background: rgba(255, 255, 255, 0.22);
 }
 
-.ev-mode-option input,
-.ev-consent input {
+.ev-mode-option input {
   width: 18px;
   height: 18px;
   accent-color: var(--ev-orange);
-}
-
-.ev-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.ev-consent input {
-  flex: none;
-  margin-top: 1px;
 }
 
 .ev-form-submit {
@@ -1416,6 +1400,15 @@ select.ev-input {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   box-shadow: 0 14px 34px var(--ev-shadow-ink);
+}
+
+.ev-form-note {
+  margin-top: -6px;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .ev-form-submit:disabled {
