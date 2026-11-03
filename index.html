@@ -679,13 +679,12 @@
           <label class="ev-field"><span>Anh/Chị có câu hỏi hoặc khó khăn gì cần được giải đáp khi tham gia chương trình? <span class="ev-optional">(không bắt buộc)</span></span>
             <textarea name="question" class="ev-input ev-textarea" rows="3" maxlength="1000"></textarea>
           </label>
-          <!-- Đăng ký = đồng ý điều khoản (thông báo dưới nút), Apps Script ghi lại vào cột "Đồng ý điều khoản" -->
-          <input type="hidden" name="consent" value="yes">
+          <label class="ev-consent"><input type="checkbox" name="consent" value="yes" required><span>Tôi đồng ý chia sẻ thông tin
+            và hình ảnh cá nhân tại sự kiện với The New Leaders và các đối tác đồng tổ chức. <span class="ev-required"
+              aria-hidden="true">*</span></span></label>
           <!-- Ô bẫy chống bot: ẩn với người dùng -->
           <input type="text" name="website" class="ev-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="ev-btn ev-btn-white ev-form-submit">Đăng ký giữ chỗ</button>
-          <p class="ev-form-note">Bằng việc đăng ký, anh/chị đồng ý chia sẻ thông tin và hình ảnh cá nhân tại sự kiện với
-            The New Leaders và các đối tác đồng tổ chức.</p>
           <p class="ev-form-success" id="eventRegisterSuccess" role="status" hidden>Cảm ơn anh/chị! Chúng tôi sẽ gửi
             xác nhận qua email.</p>
         </form>
