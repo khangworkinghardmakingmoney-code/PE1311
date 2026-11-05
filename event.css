@@ -304,7 +304,7 @@ button {
 .ev-nav {
   max-width: var(--ev-max-width);
   margin: 0 auto;
-  min-height: 80px;
+  min-height: 72px;
   padding: 12px 0;
   display: flex;
   flex-wrap: wrap;
@@ -313,40 +313,46 @@ button {
   gap: 16px;
 }
 
-/* Header brand: TNL + co-organiser and media partner logos */
 .ev-nav-brand {
+  display: block;
+  flex: none;
+  margin-right: auto;
+}
+
+/* Partner logo strip under the main nav */
+.ev-header-partners {
+  max-width: var(--ev-max-width);
+  margin: 0 auto;
+  padding: 9px 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 8px 24px;
-  min-width: 0;
-  max-width: 100%;
+  align-items: center;
+  gap: 8px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.ev-nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-left: 24px;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.ev-nav-group-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.ev-nav-group-logos {
+.ev-header-group {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.ev-nav-group-logos img {
+.ev-header-group-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ev-header-group-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ev-header-group-logos img {
   height: 24px;
   width: auto;
 }
@@ -357,7 +363,7 @@ button {
 }
 
 .ev-nav-logo {
-  height: 46px;
+  height: 44px;
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -434,7 +440,7 @@ button {
    ========================================================================== */
 .ev-hero {
   position: relative;
-  padding: 150px 24px 96px;
+  padding: 170px 24px 96px;
   background:
     radial-gradient(620px 520px at 0% 0%, rgba(30, 190, 140, 0.55), transparent 70%),
     radial-gradient(720px 560px at 100% 0%, rgba(255, 150, 70, 0.62), transparent 70%),
@@ -1663,17 +1669,52 @@ select.ev-input {
   }
 
   /* Logo đối tác xuống hàng riêng nên header cao hơn, hero phải chừa đủ chỗ */
-  .ev-nav-group {
-    padding-left: 0;
-    border-left: 0;
+  .ev-header-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 
-  .ev-hero {
-    padding: 300px 16px 72px;
+  .ev-header-partners {
+    gap: 8px 24px;
+  }
+
+  .ev-header-group-logos {
+    gap: 10px;
+  }
+
+  .ev-header-group-logos img {
+    height: 16px;
+  }
+
+  /* 2 hàng: logo + nút đăng ký, rồi menu + mạng xã hội */
+  .ev-nav-actions {
+    display: contents;
+  }
+
+  .ev-nav-cta {
+    order: 1;
   }
 
   .ev-nav-links {
-    gap: 20px;
+    order: 2;
+  }
+
+  .ev-social {
+    order: 3;
+  }
+
+  .ev-header .ev-social-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ev-hero {
+    padding: 220px 16px 72px;
+  }
+
+  .ev-nav-links {
+    gap: 16px;
   }
 
   .ev-hero-speakers {
